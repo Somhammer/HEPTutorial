@@ -64,7 +64,6 @@ int main() {
    P.AddBg(G->histograms, std::string("ZZ"));
    P.AddBg(H->histograms, std::string("QCD"));
    P.AddBg(I->histograms, std::string("single Top"));
-   
    P.Plot(string("results.pdf"));
    
    Plotter P_MC;
@@ -76,6 +75,7 @@ int main() {
    P_MC.AddBg(G->histograms_MC, std::string("ZZ"));
    P_MC.AddBg(H->histograms_MC, std::string("QCD"));
    P_MC.AddBg(I->histograms_MC, std::string("single Top"));
+
    P_MC.Plot(string("results_MC.pdf"));
 
 }

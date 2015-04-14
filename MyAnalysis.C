@@ -93,27 +93,143 @@ void MyAnalysis::SlaveBegin(TTree * /*tree*/) {
    
    h_Mmumu = new TH1F("Mmumu", "Invariant di-muon mass", 60, 60, 120);
    h_Mmumu->SetXTitle("m_{#mu#mu}");
+   h_Mmumu->SetName("Mmumu__CUUUT");
    h_Mmumu->Sumw2();
    histograms.push_back(h_Mmumu);
    histograms_MC.push_back(h_Mmumu);
    
    h_NMuon = new TH1F("NMuon", "Number of muons", 7, 0, 7);
    h_NMuon->SetXTitle("No. Muons");
+   h_NMuon->SetName("NMuon");
    h_NMuon->Sumw2();
    histograms.push_back(h_NMuon);
    histograms_MC.push_back(h_NMuon);
 
    h_Melel = new TH1F("Melel", "Invariant di-electron mass", 60, 60, 120);
    h_Melel->SetXTitle("m_{ee}");
+   h_Melel->SetName("Melel");
    h_Melel->Sumw2();
    histograms.push_back(h_Melel);
    histograms_MC.push_back(h_Melel);
 
    h_NElectron = new TH1F("NElectron", "Number of electrons", 7, 0, 7);
    h_NElectron->SetXTitle("No. Electron");
+   h_NElectron->SetName("NElectron");
    h_NElectron->Sumw2();
    histograms.push_back(h_NElectron);
    histograms_MC.push_back(h_NElectron);
+
+   h_Mjeje = new TH1F("Njeje", "Invariant t-quark mass", 60, 60, 120);
+   h_Mjeje->SetXTitle("m_{tt}");
+   h_Mjeje->SetName("Mjeje");
+   h_Mjeje->Sumw2();
+   histograms.push_back(h_Mjeje);
+   histograms_MC.push_back(h_Mjeje);
+
+   h_NJet = new TH1F("NJet", "Number of jets", 7, 0, 7);
+   h_NJet->SetXTitle("No. Jet");
+   h_NJet->SetName("NJet");
+   h_NJet->Sumw2();
+   histograms.push_back(h_NJet);
+   histograms_MC.push_back(h_NJet);
+
+   h_MBjet = new TH1F("NBjet", "Invariant b-quark mass", 60, 60, 120);
+   h_MBjet->SetXTitle("m_{bb}");
+   h_MBjet->SetName("MBjet");
+   h_MBjet->Sumw2();
+   histograms.push_back(h_MBjet);
+   histograms_MC.push_back(h_MBjet);
+
+   h_NBJet = new TH1F("NBJet", "Number of bjets", 7, 0, 7);
+   h_NBJet->SetXTitle("No.BJet");
+   h_NBJet->SetName("NBJet");
+   h_NBJet->Sumw2();
+   histograms.push_back(h_NBJet);
+   histograms_MC.push_back(h_NBJet);
+
+   h_MjejeD = new TH1F("MjejeD", "Invariant t-quark mass", 60, 60, 120);
+   h_MjejeD->SetXTitle("m_{tt}");
+   h_MjejeD->SetName("MjejeD");
+   h_MjejeD->Sumw2();
+   histograms.push_back(h_MjejeD);
+   histograms_MC.push_back(h_MjejeD);
+
+   h_NJetD = new TH1F("NJetD", "Number of jets", 7, 0, 7);
+   h_NJetD->SetXTitle("No. Jet_Dilepton");
+   h_NJetD->SetName("NJetD");
+   h_NJetD->Sumw2();
+   histograms.push_back(h_NJetD);
+   histograms_MC.push_back(h_NJetD);
+   
+   h_MBjetD = new TH1F("MBjetD", "Invariant b-quark mass", 60, 60, 120);
+   h_MBjetD->SetXTitle("m_{bb}");
+   h_MBjetD->SetName("MBjetD");
+   h_MBjetD->Sumw2();
+   histograms.push_back(h_MBjetD);
+   histograms_MC.push_back(h_MBjetD);
+
+   h_NBJetD = new TH1F("NBJetD", "Number of bjets", 7, 0, 7);
+   h_NBJetD->SetXTitle("No.BJet_Dilepton");
+   h_NBJetD->SetName("NBJetD");
+   h_NBJetD->Sumw2();
+   histograms.push_back(h_NBJetD);
+   histograms_MC.push_back(h_NBJetD);
+
+   h_MjejeD2 = new TH1F("MjejeD2", "Invariant t-quark mass", 60, 60, 120);
+   h_MjejeD2->SetXTitle("m_{tt}");
+   h_MjejeD2->SetName("MjejeD2");
+   h_MjejeD2->Sumw2();
+   histograms.push_back(h_MjejeD2);
+   histograms_MC.push_back(h_MjejeD2);
+
+   h_NJetD2 = new TH1F("NJetD2", "Number of jets", 7, 0, 7);
+   h_NJetD2->SetXTitle("No. Jet_Dilepton");
+   h_NJetD2->SetName("NJetD2");
+   h_NJetD2->Sumw2();
+   histograms.push_back(h_NJetD2);
+   histograms_MC.push_back(h_NJetD2);
+   
+   h_MBjetD2 = new TH1F("MBjetD2", "Invariant b-quark mass", 60, 60, 120);
+   h_MBjetD2->SetXTitle("m_{bb}");
+   h_MBjetD2->SetName("MBjetD2");
+   h_MBjetD2->Sumw2();
+   histograms.push_back(h_MBjetD2);
+   histograms_MC.push_back(h_MBjetD2);
+
+   h_NBJetD2 = new TH1F("NBJetD2", "Number of bjets", 7, 0, 7);
+   h_NBJetD2->SetXTitle("No.BJet_Dilepton");
+   h_NBJetD2->SetName("NBJetD2");
+   h_NBJetD2->Sumw2();
+   histograms.push_back(h_NBJetD2);
+   histograms_MC.push_back(h_NBJetD2);
+
+   h_MjejeD3 = new TH1F("MjejeD3", "Invariant t-quark mass", 60, 60, 120);
+   h_MjejeD3->SetXTitle("m_{tt}");
+   h_MjejeD3->SetName("MjejeD3");
+   h_MjejeD3->Sumw2();
+   histograms.push_back(h_MjejeD3);
+   histograms_MC.push_back(h_MjejeD3);
+
+   h_NJetD3 = new TH1F("NJetD3", "Number of jets", 7, 0, 7);
+   h_NJetD3->SetXTitle("No. Jet_Dilepton");
+   h_NJetD3->SetName("NJetD3");
+   h_NJetD3->Sumw2();
+   histograms.push_back(h_NJetD3);
+   histograms_MC.push_back(h_NJetD3);
+   
+   h_MBjetD3 = new TH1F("MBjetD3", "Invariant b-quark mass", 60, 60, 120);
+   h_MBjetD3->SetXTitle("m_{bb}");
+   h_MBjetD3->SetName("MBjetD3");
+   h_MBjetD3->Sumw2();
+   histograms.push_back(h_MBjetD3);
+   histograms_MC.push_back(h_MBjetD3);
+
+   h_NBJetD3 = new TH1F("NBJetD3", "Number of bjets", 7, 0, 7);
+   h_NBJetD3->SetXTitle("No.BJet_Dilepton");
+   h_NBJetD3->SetName("NBJetD3");
+   h_NBJetD3->Sumw2();
+   histograms.push_back(h_NBJetD3);
+   histograms_MC.push_back(h_NBJetD3);
    
 }
 
@@ -150,6 +266,9 @@ Bool_t MyAnalysis::Process(Long64_t entry) {
    
    double ElectronPtCut = 15.;
    double ElectronRelIsoCut = 999;
+
+   double JetPtCut = 30.;
+   double JetEtaCut = 2.5;
    
    //   cout << "Jets: " << endl;
    //   for (vector<MyJet>::iterator it = Jets.begin(); it != Jets.end(); ++it) {
@@ -175,6 +294,7 @@ Bool_t MyAnalysis::Process(Long64_t entry) {
    
    //////////////////////////////
    // Exercise 1: Invariant Di-Muon mass
+
    
    int N_IsoMuon = 0;
    MyMuon *muon1, *muon2;
@@ -187,7 +307,7 @@ Bool_t MyAnalysis::Process(Long64_t entry) {
       }
    }
    
-   h_NMuon->Fill(N_IsoMuon, EventWeight);
+   h_NMuon->Fill(N_IsoMuon, EventWeight); // It is nocut
    
    if (N_IsoMuon > 1 && triggerIsoMu24) {
       if (muon1->Pt()>MuonPtCut) {
@@ -198,23 +318,77 @@ Bool_t MyAnalysis::Process(Long64_t entry) {
    int N_IsoElectron = 0;
    MyElectron *electron1, *electron2;
    
-   for (vector<MyElectron>::iterator jt = Electrons.begin(); jt != Electrons.end(); ++jt) {
-      if (jt->IsIsolated(ElectronRelIsoCut)) {
+	for (vector<MyElectron>::iterator jt = Electrons.begin(); jt != Electrons.end(); ++jt) {
+		if (jt->IsIsolated(ElectronRelIsoCut)) {
          ++N_IsoElectron;
          if (N_IsoElectron == 1) electron1 = &(*jt);
          if (N_IsoElectron == 2) electron2 = &(*jt);
-      }
-   }
+  		 }
+ 	  }
    
    h_NElectron->Fill(N_IsoElectron, EventWeight);
    
    if (N_IsoElectron > 1 && triggerIsoMu24) {
       if (electron1->Pt()>ElectronPtCut) {
          h_Melel->Fill((*electron1 + *electron2).M(), EventWeight);
-      }
+     		 }
+ 	  }
+
+   int N_IsBTaggedJet = 0;
+   int N_Jet = 0;
+   MyJet *bjet1, *bjet2;
+   MyJet *jet1, *jet2;
+
+   for (vector<MyJet>::iterator jt = Jets.begin(); jt != Jets.end(); ++jt) {
+		if(jt->Pt() > JetPtCut && abs(jt->Eta()) < JetEtaCut ) {
+			N_Jet++;			
+			if (N_Jet == 1) jet1 = &(*jt);
+			if (N_Jet == 2) jet2 = &(*jt);
+
+			if (jt->IsBTagged(2.)) {
+				  ++N_IsBTaggedJet;
+				  if (N_IsBTaggedJet == 1) bjet1 = &(*jt);
+				  if (N_IsBTaggedJet == 2) bjet2 = &(*jt);		
+			    }
+		}
    }
+
+   h_NBJet->Fill(N_IsBTaggedJet, EventWeight);
+   h_NJet->Fill(N_Jet, EventWeight);
+
+   h_MBjet->Fill((*bjet1 + *bjet2).M(), EventWeight);
+   h_Mjeje->Fill((*jet1 + *jet2).M(), EventWeight);
+
+	/*(if (N_Jet > 1) {  //trigger~~ : Mu의 Pt가 24보다 큰 것만 가져오겠다.
+	   if (jet1->Pt()>JetPtCut) {
+	   		h_Mjeje->Fill((*jet1 *jet2).M(), EventWeight);
+   		}
+	} */ 
    //////////////////////////////
-   
+   if (N_IsoElectron + N_IsoMuon <2) return kTRUE; // cutting start!
+
+   h_NBJetD->Fill(N_IsBTaggedJet, EventWeight);
+   h_NJetD->Fill(N_Jet, EventWeight);
+
+   h_MBjetD->Fill((*bjet1 + *bjet2).M(), EventWeight);
+   h_MjejeD->Fill((*jet1 + *jet2).M(), EventWeight);
+
+   if (N_IsBTaggedJet < 1) return kTRUE;
+ 
+   h_NBJetD2->Fill(N_IsBTaggedJet, EventWeight);
+   h_NJetD2->Fill(N_Jet, EventWeight);
+
+   h_MBjetD2->Fill((*bjet1 + *bjet2).M(), EventWeight);
+   h_MjejeD2->Fill((*jet1 + *jet2).M(), EventWeight);
+
+   if (N_IsBTaggedJet < 2) return kTRUE;
+
+   h_NBJetD3->Fill(N_IsBTaggedJet, EventWeight);
+   h_NJetD3->Fill(N_Jet, EventWeight);
+
+   h_MBjetD3->Fill((*bjet1 + *bjet2).M(), EventWeight);
+   h_MjejeD3->Fill((*jet1 + *jet2).M(), EventWeight);
+
    return kTRUE;
 }
 

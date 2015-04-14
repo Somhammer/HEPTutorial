@@ -6,6 +6,7 @@
  */
 
 #include "Plotter.h"
+#include "TLatex.h"
 
 Plotter::Plotter() {
 	// TODO Auto-generated constructor stub
@@ -35,7 +36,7 @@ void Plotter::Plot(std::string filename) {
 	MyStyle->SetPadBorderSize(2);
 	MyStyle->SetPalette(51, 0);
 	MyStyle->SetPadBottomMargin(0.15);
-	MyStyle->SetPadTopMargin(0.05);
+	MyStyle->SetPadTopMargin(0.15);
 	MyStyle->SetPadLeftMargin(0.15);
 	MyStyle->SetPadRightMargin(0.25);
 	MyStyle->SetTitleColor(1);
@@ -79,6 +80,7 @@ void Plotter::Plot(std::string filename) {
       l->SetLineWidth(2);
 		if (bg.size() > 0) {
 			hs = new THStack("hs", bg.at(0).at(i)->GetName());
+			if (data.size() > 0) std::cout << bg.at(0).at(i)->GetName() << std::endl;
 			int j = 0;
 			for (std::vector<std::vector<TH1F*> >::const_iterator it = bg.begin(); it != bg.end(); ++it) {
 				switch (j) {
@@ -115,6 +117,7 @@ void Plotter::Plot(std::string filename) {
 				}
 				hs->Add(it->at(i));
 				l->AddEntry(it->at(i), bg_names.at(j).c_str(), "f");
+				if(data.size() > 0) std::cout << bg_names.at(j).c_str() << " : number of events - " << it->at(i)->Integral() << std::endl;
 				++j;
 			}
 		}
@@ -122,9 +125,13 @@ void Plotter::Plot(std::string filename) {
 
 		TCanvas *c = new TCanvas("c", "c", 800, 600);
 		c->SetLogy(DrawLog);
+
       std::string plotname;
 		if (data.size() > 0) {
-         plotname = std::string(data.at(0).at(i)->GetName());
+			plotname = std::string(data.at(0).at(i)->GetName());
+			
+			std::cout << " data : number of events - " << data.at(0).at(i)->Integral() << std::endl;
+	
 			data.at(0).at(i)->SetMaximum(5 * data.at(0).at(i)->GetMaximum());
 			data.at(0).at(i)->GetXaxis()->SetTitleOffset(1.3);
 			data.at(0).at(i)->GetYaxis()->SetTitleOffset(1.3);
@@ -140,7 +147,7 @@ void Plotter::Plot(std::string filename) {
 		}
 		if (data.size() == 0 && bg.size() > 0) {
          plotname = std::string(bg.at(0).at(i)->GetName());
-			hs->Draw("hist");
+		  hs->Draw("hist");
          hs->GetXaxis()->SetTitleOffset(1.3);
          hs->GetXaxis()->SetNdivisions(505);
          hs->GetYaxis()->SetTitleOffset(1.3);
@@ -151,6 +158,12 @@ void Plotter::Plot(std::string filename) {
          l->Draw("same");
 		}
 //      c->Print((filename+std::string("_")+plotname+std::string(".pdf")).c_str());
+
+		TLatex *label= new TLatex;
+		label->SetNDC();
+		label->SetTextSize(0.05);
+		label->DrawLatex(0.3,0.90, plotname.c_str());
+
 		if (i == 0 && N_histos > 1) {
 			c->Print((filename+std::string("(")).c_str());
 		} else if (i > 0 && i == N_histos - 1)
