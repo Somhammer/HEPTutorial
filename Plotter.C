@@ -162,7 +162,7 @@ void Plotter::Plot(std::string filename) {
 		TLatex *label= new TLatex;
 		label->SetNDC();
 		label->SetTextSize(0.05);
-		label->DrawLatex(0.3,0.90, plotname.c_str());
+		label->DrawLatex(0.05,0.90, plotname.c_str());
 
 		if (i == 0 && N_histos > 1) {
 			c->Print((filename+std::string("(")).c_str());

@@ -1,0 +1,115 @@
+목표 : ttbar의  dileptonic channel 구하고 그것의 CrossSection_(sigma)experiment계산.
+
+"Note"
+
+CrossSection_experiment =  N_tt/L_int * Efficiency
+CrossSection_theory = 165pb at 7TeV
+
+theory.
+Luminosity = number of event / time * area [unit/s*m^2]
+
+Integrated Luminosity = integral_0 to 1year Luminosity dt = L_int [unit/m^2]
+
+in data, L_int = 20fb^-1 = 20000pb^-1 ---> but tutorial : L_int = 50pb^-1
+
+N_tt_theory = CrossSection_tt_theory * L_int = 165pb * 50pb^-1 = 8250 unit.
+
+simulation.
+
+if give Cut : jetPt > 20, muonPt > 20, electronPt > 20 
+
+	1.Efficiency = passed unit number / N_tt_theory
+
+	2.N_tt_afterselection = integral_(some range) Njet in Histogram
+
+	--> except z,w,qcd = N_tt
+
+	3.N_tt_afterselection = Efficiency * CrossSection_tt_experiment * L_int
+
+	--> CrossSection_tt_experiment = N_tt_afterselection / (L_int * Efficiency)
+
+
+/* in ttbar.root, efficiency = 100/10000 = 1% */
+
+and then. compare CrossSection_experiment & CrossSection_theory.
+
+"algorithm"
+
+for (jet[start] to jet[end]) {
+	if(jetPt > 20 && muonPt > 20 && electronPt > 20) {
+		++passed_unit;
+		if( number of muon + number of electron == 2) ++N_tt_afterselection;
+	}
+}
+
+number_of_dileptonic_channel->Fill(N_tt_afterselection, EventWeight);
+
+Efficiency = passed_unit/N_tt_theory;
+
+CrossSection_tt_experiment = N_tt_afterselection/(L_int * Efficiency); 
+
+
+"sudo coding"
+
+void MyAnalysis::SlaveBegin(TTree *) {
+...
+   h_NDilepton = new TH1F("NDilpeton", "Number of dileptonic channel", 60, 60, 120);
+   h_NDilepton->SetXTitle("No. Dilepton");
+   h_NDilepton->Sumw2();
+   histograms.push_back(h_NDilepton);
+   histograms_MC.push_back(h_NDilepton);
+...
+}
+
+Bool_t MyAnalysis::Process(Long64_t entry) {
+...
+	double MuonPtCut = 20.;
+	double MuonRelIsoCut = 0.10;
+
+	double ElectronPtCut = 20.;
+	double ElectronRelIsoCut = 0.10;
+
+	double JetPtCut = 20.;
+	double JetEtaCut = 2.5;
+...
+
+	int N_Jet = 0; 
+	int N_Dilep = 0;
+	// N_Jet is number of jet -> It is number of passed_unit. 
+	// N_DiJet is number of dileptonic channel -> It is N_tt_afterselection.
+	//My Jet *jet1, *jet2' // jet1 is passed unit, jet2 is dileptonic channel;
+
+	for (vector<MyJet>::iterator jt = Jets.begin(); jt != Jets.end(); ++jt) {
+		if(jt->Pt() > JetPtCut && abs(jt->Eta()) < JetEtaCut) {
+			++N_Jet;
+			//jet1 = &(*jt);
+			if(N_Electron + N_Muon == 2) N_Dilep++; //jet2 = &(*jt); 
+			//How can we find number of electron & muon?
+		}
+	}
+	
+	h_NDilepton->Fill(N_Dilep, EventWeight);
+
+	double L_int = 50.;
+	double Efficiency = N_Jet/N_Theory;
+	double CrossSection_tt_experiment = N_Dilep/(L_int * Efficiency);
+	
+	cout << "CrossSection_tt_experiment is " << CrossSection_tt_experiment << endl;
+}
+
+
+/*Table
+
+		Nocut		selection 1( nlepton = 2 )		selection 2( bttaged < 1 )		selection 3( bttaged < 2 )		efficiency
+TTbar																															selection / Nocut
+W+jets
+...
+
+back-	total-TTbar
+ground
+
+total
+data
+*/
+
+--->  sigma_exp = (data-background) / effi * Lumi
